@@ -21,17 +21,19 @@ while True:
     if update_id != last_update_id:
 
         last_msg = last_update['message']
-        chat_id = last_msg['chat']['id']
-        text = last_msg['text']
-       
-       
-        print(chat_id)
-        payload = {
-            "chat_id": chat_id,
-            "text": text
-            }
-        requests.get(url=URL, params=payload)
+        if "text" in last_msg.keys():
+            # print(last_msg.keys())
+            chat_id = last_msg['chat']['id']
+            text = last_msg['text']
+        
+        
+            # print(chat_id)
+            payload = {
+                "chat_id": chat_id,
+                "text": text
+                }
+            requests.get(url=URL, params=payload)
 
-        update_id = last_update_id
+            update_id = last_update_id
     time.sleep(1)
 
